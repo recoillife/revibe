@@ -1,0 +1,32 @@
+name: CI/CD Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+      working-directory: ./revibe-backend
+
+    - name: Run tests
+      run: npm test
+      working-directory: ./revibe-backend
+
+    - name: Install dependencies
+      run: npm install
+      working-directory: ./revibe-frontend
+
+    - name: Run tests
+      run: npm test
+      working-directory: ./revibe-frontend
+
